@@ -1,0 +1,28 @@
+name: Build Keenetic MIPSLE
+
+on:
+  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой
+  release:
+    types: [published]
+
+jobs:
+  build-keenetic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build in Cross-Docker
+        run: |
+          docker run --rm -v "$PWD":/home/rust/src messense/rust-musl-cross:mipsel-unknown-linux-musl cargo build --release
+
+      - name: Install UPX and Compress
+        run: |
+          sudo apt-get update && sudo apt-get install -y upx-ucl
+          upx --brute target/mipsel-unknown-linux-musl/release/shadow-tls
+
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shadow-tls-kn2311
+          path: target/mipsel-unknown-linux-musl/release/shadow-tls
