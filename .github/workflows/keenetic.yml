@@ -15,7 +15,7 @@ jobs:
 
       - name: Build with softfloat flags
         run: |
-          RUSTFLAGS="-C target-feature=+soft-float" cargo build --release --target mipsel-unknown-linux-musl
+          RUSTFLAGS="-C target-feature=+soft-float" CFLAGS="-msoft-float" cargo build --release --target mipsel-unknown-linux-musl
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
