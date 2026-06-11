@@ -6,7 +6,7 @@
   "target-pointer-width": 32,
   "target-c-int-width": 32,
   "os": "linux",
-  "environment": "musl",
+  "env": "musl",
   "abi": "softfloat",
   "vendor": "unknown",
   "linker-flavor": "gcc",
