@@ -15,7 +15,7 @@ jobs:
 
       - name: Build with softfloat ABI
         run: |
-          cargo build --release --target ./.mipsel-softfloat.json
+          cargo -Zjson-target-spec build --release --target ./.mipsel-softfloat.json
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
