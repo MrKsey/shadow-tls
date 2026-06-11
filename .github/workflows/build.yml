@@ -8,20 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: messense/rust-musl-cross:mipsel-musl
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install MIPS cross-compiler
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-mipsel-linux-gnu
-        
-      - name: Install musl cross-compiler for MIPS
-        run: |
-          wget -q https://musl.cc/mipsel-linux-musl-cross.tgz
-          tar xzf mipsel-linux-musl-cross.tgz
-          echo "$PWD/mipsel-linux-musl-cross/bin" >> $GITHUB_PATH
 
       - name: Build with softfloat ABI
         run: |
