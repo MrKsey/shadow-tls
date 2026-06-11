@@ -16,7 +16,7 @@
   "crt-static-default": true,
   "executables": true,
   "relocation-model": "static",
-  "code-model": "default",
+  "code-model": "small",
   "disable-redzone": true,
   "panic-strategy": "abort",
   "pre-link-args": {
