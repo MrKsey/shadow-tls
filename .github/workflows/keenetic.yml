@@ -1,4 +1,4 @@
-name: Build Keenetic MIPSLE
+name: Build Keenetic MIPSLE Softfloat
 
 on:
   workflow_dispatch: # Позволяет запускать сборку вручную кнопкой
@@ -12,12 +12,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build in Cross-Docker
+      - name: Install MIPS cross-compiler
         run: |
-          docker run --rm -v "$PWD":/home/rust/src messense/rust-musl-cross:mipsel-musl cargo build --release
+          sudo apt-get update
+          sudo apt-get install -y gcc-mipsel-linux-gnu
+        
+      - name: Install musl cross-compiler for MIPS
+        run: |
+          wget -q https://musl.cc/mipsel-linux-musl-cross.tgz
+          tar xzf mipsel-linux-musl-cross.tgz
+          echo "$PWD/mipsel-linux-musl-cross/bin" >> $GITHUB_PATH
+
+      - name: Build with softfloat ABI
+        run: |
+          cargo build --release --target ./.mipsel-softfloat.json
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: shadow-tls-kn2311
+          name: shadow-tls-keenetic-mipsel-softfloat
           path: target/mipsel-unknown-linux-musl/release/shadow-tls

@@ -1,0 +1,25 @@
+{
+  "llvm-target": "mipsel-unknown-linux-musl",
+  "data-layout": "e-m:e-p:32:32-i64:64-i128:128-n32:64-S32",
+  "arch": "mips",
+  "target-endian": "little",
+  "target-pointer-width": "32",
+  "target-c-int-width": "32",
+  "os": "linux",
+  "environment": "musl",
+  "abi": "softfloat",
+  "vendor": "unknown",
+  "linker-flavor": "gcc",
+  "linker": "mipsel-linux-musl-gcc",
+  "dynamic-linking": false,
+  "crt-static-respected": true,
+  "crt-static-default": true,
+  "executables": true,
+  "relocation-model": "static",
+  "code-model": "default",
+  "disable-redzone": true,
+  "panic-strategy": "abort",
+  "pre-link-args": {
+    "gcc": ["-mips32r2", "-msoft-float"]
+  }
+}

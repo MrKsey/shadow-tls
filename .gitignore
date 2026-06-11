@@ -1,1 +1,5 @@
 /target
+# Кастомный target для MIPS softfloat - нужен в репозитории
+!.mipsel-softfloat.json
+# Документация по кросс-компиляции - нужна в репозитории
+!CROSS_COMPILE.md
