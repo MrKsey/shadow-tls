@@ -13,9 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build with softfloat ABI
+      - name: Build with softfloat flags
         run: |
-          cargo -Zjson-target-spec build --release --target ./.mipsel-softfloat.json
+          RUSTFLAGS="-C target-feature=+soft-float" cargo build --release --target mipsel-unknown-linux-musl
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
