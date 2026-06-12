@@ -14,6 +14,9 @@ monoio = "0.2.0"
 monoio-rustls-fork-shadow-tls = "0.3.0-mod.2"
 rustls-fork-shadow-tls = { version = "0.20.9-mod.2", default-features = false }
 
+# Direct dependency to force ring 0.17.x for MIPS support
+ring = "0.17"
+
 anyhow = "1"
 byteorder = "1"
 clap = { version = "4", features = ["derive"] }
