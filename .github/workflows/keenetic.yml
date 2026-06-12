@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set default toolchain to stable
+        run: rustup default stable
+
       - name: Install cross-compiler
         run: apt-get update && apt-get install -y gcc-mipsel-linux-gnu
 
