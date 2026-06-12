@@ -8,18 +8,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: messense/rust-musl-cross:mipsel-musl
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build for MIPS LE musl
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-action@stable
+        with:
+          targets: mipsel-unknown-linux-gnu
+
+      - name: Install cross-compiler
+        run: sudo apt-get update && sudo apt-get install -y gcc-mipsel-linux-gnu
+
+      - name: Build for MIPS LE
         run: |
-          cargo update
-          cargo build --release --target mipsel-unknown-linux-musl
+          cargo build --release --target mipsel-unknown-linux-gnu
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
           name: shadow-tls-mipsel-softfloat
-          path: target/mipsel-unknown-linux-musl/release/shadow-tls
+          path: target/mipsel-unknown-linux-gnu/release/shadow-tls
