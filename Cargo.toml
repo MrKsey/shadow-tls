@@ -15,8 +15,8 @@ monoio-rustls-fork-shadow-tls = "0.3.0-mod.2"
 rustls-fork-shadow-tls = { version = "0.20.9-mod.2", default-features = false }
 
 [patch.crates-io]
-# Update ring to 0.17.x which supports MIPS
-ring = { version = "0.17" }
+# Update ring to 0.17.7 which supports MIPS
+ring = { version = "=0.17.7" }
 
 anyhow = "1"
 byteorder = "1"
