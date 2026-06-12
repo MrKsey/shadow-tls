@@ -8,27 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: rust:1.70.0
+    container: messense/rust-musl-cross:mipsel-musl
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install stable toolchain
-        run: rustup install stable && rustup default stable
-
-      - name: Install cross-compiler
-        run: apt-get update && apt-get install -y gcc-mipsel-linux-gnu
-
-      - name: Add mipsel target
-        run: rustup target add mipsel-unknown-linux-gnu
-
-      - name: Build for MIPS LE
+      - name: Build for MIPS LE musl
         run: |
-          cargo update
-          CARGO_TARGET_MIPSEL_UNKNOWN_LINUX_GNU_LINKER=mipsel-linux-gnu-gcc cargo build --release --target mipsel-unknown-linux-gnu
+          cargo update -p ring
+          cargo build --release --target mipsel-unknown-linux-musl
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
           name: shadow-tls-mipsel-softfloat
-          path: target/mipsel-unknown-linux-gnu/release/shadow-tls
+          path: target/mipsel-unknown-linux-musl/release/shadow-tls
