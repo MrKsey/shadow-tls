@@ -34,3 +34,7 @@ serde_json = "1"
 [profile.release]
 lto = true
 opt-level = 3
+
+[patch.crates-io]
+# Use rustls with aws-lc-rs instead of ring for MIPS softfloat support
+rustls = { git = "https://github.com/rustls/rustls", rev = "v0.21.12", default-features = false, features = ["aws_lc_rs"] }
