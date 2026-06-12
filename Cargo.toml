@@ -10,9 +10,13 @@ repository = "https://github.com/ihciah/shadow-tls"
 version = "0.2.25"
 
 [dependencies]
-monoio = { version = "0.2.0", features = ["sync"] }
-monoio-rustls-fork-shadow-tls = { version = "0.3.0-mod.2" }
+monoio = "0.2.0"
+monoio-rustls-fork-shadow-tls = "0.3.0-mod.2"
 rustls-fork-shadow-tls = { version = "0.20.9-mod.2", default-features = false }
+
+[patch.crates-io]
+# Update ring to 0.17.x which supports MIPS
+ring = { version = "0.17" }
 
 anyhow = "1"
 byteorder = "1"
