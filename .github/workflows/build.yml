@@ -8,22 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: rust:1.75.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly-2024-01-01
-          targets: mipsel-unknown-linux-gnu
-
       - name: Install cross-compiler
-        run: sudo apt-get update && sudo apt-get install -y gcc-mipsel-linux-gnu
+        run: apt-get update && apt-get install -y gcc-mipsel-linux-gnu
+
+      - name: Add mipsel target
+        run: rustup target add mipsel-unknown-linux-gnu
 
       - name: Build for MIPS LE
         run: |
-          cargo build --release --target mipsel-unknown-linux-gnu
+          cargo update
+          CARGO_TARGET_MIPSEL_UNKNOWN_LINUX_GNU_LINKER=mipsel-linux-gnu-gcc cargo build --release --target mipsel-unknown-linux-gnu
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
