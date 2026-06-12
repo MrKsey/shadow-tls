@@ -8,7 +8,7 @@ on:
 jobs:
   build-keenetic:
     runs-on: ubuntu-latest
-    container: rust:1.75.0
+    container: rust:1.70.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
