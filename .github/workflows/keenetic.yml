@@ -15,6 +15,7 @@ jobs:
 
       - name: Build for MIPS LE musl
         run: |
+          cargo update
           cargo build --release --target mipsel-unknown-linux-musl
 
       - name: Upload Binary Artifact
