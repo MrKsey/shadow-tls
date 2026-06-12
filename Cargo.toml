@@ -12,7 +12,7 @@ version = "0.2.25"
 [dependencies]
 monoio = "0.2.0"
 monoio-rustls-fork-shadow-tls = "0.3.0-mod.2"
-rustls-fork-shadow-tls = { version = "0.20.9-mod.2", default-features = false }
+rustls-fork-shadow-tls = { version = "0.20.9-mod.2", default-features = false, features = ["aws-lc-rs"] }
 
 anyhow = "1"
 byteorder = "1"
@@ -30,10 +30,6 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 webpki-roots = "0.26"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-
-[patch.crates-io]
-# Update ring to 0.17.7 which supports MIPS
-ring = { version = "=0.17.7" }
 
 [profile.release]
 lto = true
